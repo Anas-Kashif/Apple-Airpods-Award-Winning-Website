@@ -48,9 +48,11 @@ export default function Navbar({ onNavClick }: NavbarProps) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        scrolled
-          ? 'glass-nav py-2 sm:py-3 border-b border-white/10 shadow-2xl bg-void/80'
-          : 'bg-transparent py-3 sm:py-5 border-b border-transparent'
+        mobileMenuOpen
+          ? 'bg-void py-2 sm:py-3 border-b border-white/10 shadow-2xl'
+          : scrolled
+            ? 'glass-nav py-2 sm:py-3 border-b border-white/10 shadow-2xl bg-void/80'
+            : 'bg-transparent py-3 sm:py-5 border-b border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -106,7 +108,7 @@ export default function Navbar({ onNavClick }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden fixed inset-x-0 top-[52px] sm:top-[60px] bottom-0 bg-void/95 backdrop-blur-xl border-t border-white/10 z-50 flex flex-col"
+            className="md:hidden fixed inset-x-0 top-[52px] sm:top-[60px] bottom-0 bg-void backdrop-blur-xl border-t border-white/10 z-50 flex flex-col"
           >
             <div className="flex-1 flex flex-col justify-center px-8 py-6 space-y-1">
               {navLinks.map((link, idx) => (
