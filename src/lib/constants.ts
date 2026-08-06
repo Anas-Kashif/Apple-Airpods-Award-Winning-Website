@@ -30,10 +30,11 @@ export const STORY_BEATS: StoryBeat[] = [
     id: 'hero',
     startProgress: 0,
     endProgress: 0.15,
-    alignment: 'center',
+    alignment: 'left',
     eyebrow: 'THE ULTIMATE LISTENING EXPERIENCE',
     title: 'Apple AirPods Max',
-    subtitle: 'High-fidelity audio, perfected. Industry-leading Active Noise Cancellation, re-engineered for effortless listening.',
+    subtitle: 'High-fidelity audio, industry-leading Active Noise Cancellation, Spatial Audio, and exceptional all-day comfort.',
+    ctaText: 'Experience AirPods Max',
   },
   {
     id: 'engineering',

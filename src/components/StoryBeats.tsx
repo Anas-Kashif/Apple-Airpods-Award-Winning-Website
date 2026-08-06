@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { STORY_BEATS, StoryBeat } from '@/lib/constants';
-import { ChevronRight, ArrowDown, Sparkles, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { STORY_BEATS } from '@/lib/constants';
+import { ChevronRight, ArrowDown, Sparkles, CheckCircle2 } from 'lucide-react';
 
 interface StoryBeatsProps {
   scrollProgress: number; // 0 to 1
@@ -16,15 +16,86 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
     (beat) => scrollProgress >= beat.startProgress && scrollProgress <= beat.endProgress
   );
 
+  const isHero = activeBeat?.id === 'hero';
+
   return (
     <div className="fixed inset-0 z-20 pointer-events-none flex flex-col justify-between p-6 md:p-12">
-      {/* Top Margin Spacer */}
+      {/* Top Margin Spacer for Fixed Navbar */}
       <div className="h-16" />
 
       {/* Main Narrative Beats Overlay Container */}
-      <div className="max-w-7xl mx-auto w-full flex-1 flex items-center justify-center relative">
+      <div className="max-w-7xl mx-auto w-full flex-1 flex items-center relative">
         <AnimatePresence mode="wait">
-          {activeBeat && (
+          {activeBeat && isHero && (
+            <motion.div
+              key="hero-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            >
+              {/* Left Column: Hero Copy & CTA */}
+              <div className="lg:col-span-6 xl:col-span-5 text-left pointer-events-auto z-20 flex flex-col items-start justify-center">
+                {/* Eyebrow Label */}
+                {activeBeat.eyebrow && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-apple-cyan" />
+                    <span className="text-[11px] font-semibold tracking-[0.2em] text-apple-cyan uppercase">
+                      {activeBeat.eyebrow}
+                    </span>
+                  </motion.div>
+                )}
+
+                {/* Large Bold Apple-style Headline */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.0, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.04]"
+                >
+                  <span className="block text-white">Apple</span>
+                  <span className="block text-gradient-cyan mt-1">AirPods Max</span>
+                </motion.h1>
+
+                {/* Description Paragraph (#D1D1D1, Max Width 500px) */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.0, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-base sm:text-lg text-[#D1D1D1] font-normal leading-relaxed mb-8 max-w-[500px]"
+                >
+                  {activeBeat.subtitle}
+                </motion.p>
+
+                {/* Premium CTA Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.0, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex items-center space-x-4"
+                >
+                  <button
+                    onClick={() => onCtaClick('buy')}
+                    className="btn-gradient px-8 py-4 rounded-full text-sm font-semibold tracking-wide text-white flex items-center space-x-3 shadow-2xl shadow-apple-blue/40 hover:scale-105 transition-all group"
+                  >
+                    <span>Experience AirPods Max</span>
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </motion.div>
+              </div>
+
+              {/* Right Column: Reserved spacer for AirPods Max 3D Render */}
+              <div className="hidden lg:block lg:col-span-6 xl:col-span-7 h-full min-h-[400px] pointer-events-none" />
+            </motion.div>
+          )}
+
+          {activeBeat && !isHero && (
             <motion.div
               key={activeBeat.id}
               initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
@@ -54,19 +125,12 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
               )}
 
               {/* Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-[1.08]">
-                {activeBeat.title.includes('AirPods Max') ? (
-                  <>
-                    <span className="block text-white">Apple</span>
-                    <span className="text-gradient-cyan">AirPods Max</span>
-                  </>
-                ) : (
-                  activeBeat.title
-                )}
-              </h1>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-[1.08]">
+                {activeBeat.title}
+              </h2>
 
-              {/* Subtitle / Body Copy */}
-              <p className="text-lg sm:text-xl text-white/70 font-normal leading-relaxed mb-6 max-w-xl">
+              {/* Subtitle / Body Copy (#D1D1D1) */}
+              <p className="text-lg sm:text-xl text-[#D1D1D1] font-normal leading-relaxed mb-6 max-w-xl">
                 {activeBeat.subtitle}
               </p>
 
@@ -84,7 +148,7 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
                   {activeBeat.points.map((pt, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center space-x-2.5 text-sm text-white/80 font-medium"
+                      className="flex items-center space-x-2.5 text-sm text-[#D1D1D1] font-medium"
                     >
                       <CheckCircle2 className="w-4 h-4 text-apple-cyan shrink-0" />
                       <span>{pt}</span>
@@ -93,25 +157,7 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
                 </div>
               )}
 
-              {/* Hero Scroll Indicator */}
-              {activeBeat.id === 'hero' && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 }}
-                  className="mt-8 flex flex-col items-center justify-center space-y-2 text-white/40"
-                >
-                  <span className="text-xs tracking-widest uppercase font-mono">Scroll to Explode & Explore</span>
-                  <motion.div
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-                  >
-                    <ArrowDown className="w-4 h-4 text-apple-cyan" />
-                  </motion.div>
-                </motion.div>
-              )}
-
-              {/* Call to Action Buttons (Final Beat) */}
+              {/* Call to Action Buttons */}
               {activeBeat.ctaText && (
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                   <button
@@ -135,9 +181,31 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Bottom Center Scroll Indicator (Hero Only) */}
+        {scrollProgress <= 0.15 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center justify-center space-y-2 pointer-events-auto cursor-pointer group"
+            onClick={() => onCtaClick('engineering')}
+          >
+            <span className="text-[11px] tracking-[0.22em] uppercase font-mono text-white/50 group-hover:text-white/90 transition-colors">
+              Scroll to Explore
+            </span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+            >
+              <ArrowDown className="w-4 h-4 text-apple-cyan group-hover:text-white transition-colors" />
+            </motion.div>
+          </motion.div>
+        )}
       </div>
 
-      {/* Bottom Progress Bar & Indicator */}
+      {/* Bottom Scroll Progress Bar */}
       <div className="max-w-7xl mx-auto w-full flex items-center justify-between pointer-events-auto pt-4 border-t border-white/5 text-xs text-white/40">
         <div className="flex items-center space-x-2 font-mono">
           <span className="w-2 h-2 rounded-full bg-apple-cyan animate-pulse" />
