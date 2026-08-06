@@ -132,8 +132,20 @@ export default function Footer({ onNavClick }: FooterProps) {
 
           {/* Bottom Bar Row */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-xs font-normal">
-            <div className="flex items-center space-x-2 text-base font-semibold tracking-tight text-white">
+            <div className="flex items-center space-x-3 text-base font-semibold tracking-tight text-white">
               <span>Apple</span>
+              <span className="text-white/20">|</span>
+              <span className="text-xs font-normal text-white/60">
+                Developed by{' '}
+                <a
+                  href="https://devbyanas.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-apple-cyan hover:underline transition-colors font-medium"
+                >
+                  Anas Kashif
+                </a>
+              </span>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-x-8 sm:gap-x-12 gap-y-3 font-mono tracking-[0.18em] text-[11px] uppercase text-white/50">
