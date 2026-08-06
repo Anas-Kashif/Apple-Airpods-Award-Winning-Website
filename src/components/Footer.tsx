@@ -95,24 +95,61 @@ export default function Footer({ onNavClick }: FooterProps) {
         </motion.div>
       </div>
 
-      {/* Apple Corporate Copyright Footer */}
-      <div className="border-t border-white/10 py-10 px-4 sm:px-6 lg:px-8 text-xs text-white/40 font-mono">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-3">
-            <span className="text-lg font-bold text-white font-sans tracking-wide">APPLE</span>
-            <span>© 2026 Apple Inc. All rights reserved.</span>
+      {/* Grand Google Labs Style Minimalist Footer - Matched to Dark Theme */}
+      <div className="bg-void text-white border-t border-white/10 px-6 sm:px-12 lg:px-20 pt-16 pb-10 transition-colors">
+        <div className="max-w-7xl mx-auto">
+          {/* Top Navigation Row */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-sm font-medium">
+            <span className="text-white/60 font-normal tracking-tight text-base sm:text-lg">
+              Other teams and product areas
+            </span>
+
+            <div className="flex flex-wrap items-center gap-x-8 sm:gap-x-12 gap-y-3 text-sm font-normal text-white/60">
+              <a href="#hero" onClick={(e) => { e.preventDefault(); onNavClick('hero'); }} className="hover:text-white transition-colors">
+                Apple Music
+              </a>
+              <a href="#hero" onClick={(e) => { e.preventDefault(); onNavClick('hero'); }} className="hover:text-white transition-colors">
+                Apple Vision Pro
+              </a>
+              <a href="#hero" onClick={(e) => { e.preventDefault(); onNavClick('hero'); }} className="hover:text-white transition-colors">
+                Spatial Audio
+              </a>
+              <a href="#hero" onClick={(e) => { e.preventDefault(); onNavClick('hero'); }} className="hover:text-white transition-colors">
+                AppleCare+
+              </a>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <button onClick={() => onNavClick('hero')} className="hover:text-white transition-colors">
-              Privacy Policy
-            </button>
-            <button onClick={() => onNavClick('hero')} className="hover:text-white transition-colors">
-              Terms of Use
-            </button>
-            <button onClick={() => onNavClick('hero')} className="hover:text-white transition-colors">
-              Support & Manuals
-            </button>
+          {/* Huge Hero Display Wordmark */}
+          <div className="py-12 sm:py-16 md:py-20 select-none overflow-hidden">
+            <h1 className="text-[13vw] sm:text-[14vw] lg:text-[13.5vw] font-bold tracking-[-0.04em] leading-[0.85] text-white whitespace-nowrap">
+              AirPods Max
+            </h1>
+          </div>
+
+          {/* Thin Hairline Divider */}
+          <div className="border-t border-white/10 w-full mb-8" />
+
+          {/* Bottom Bar Row */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-xs font-normal">
+            <div className="flex items-center space-x-2 text-base font-semibold tracking-tight text-white">
+              <span>Apple</span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-8 sm:gap-x-12 gap-y-3 font-mono tracking-[0.18em] text-[11px] uppercase text-white/50">
+              <a href="#hero" onClick={(e) => { e.preventDefault(); onNavClick('hero'); }} className="hover:text-white transition-colors">
+                ABOUT AIRPODS
+              </a>
+              <a href="#tech-specs" onClick={(e) => { e.preventDefault(); onNavClick('tech-specs'); }} className="hover:text-white transition-colors">
+                APPLE PRODUCTS
+              </a>
+              <a href="#hero" onClick={(e) => { e.preventDefault(); onNavClick('hero'); }} className="hover:text-white transition-colors">
+                PRIVACY
+              </a>
+              <a href="#hero" onClick={(e) => { e.preventDefault(); onNavClick('hero'); }} className="hover:text-white transition-colors">
+                TERMS
+              </a>
+            </div>
           </div>
         </div>
       </div>
