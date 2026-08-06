@@ -48,24 +48,24 @@ export default function TechSpecs() {
   ];
 
   return (
-    <section id="specs" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-void border-t border-white/10">
+    <section id="specs" className="relative py-16 sm:py-28 px-4 sm:px-6 lg:px-8 bg-void border-t border-white/10">
       {/* Background Soft Glow */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-apple-cyan/5 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 gap-6">
           <div>
             <span className="text-xs font-semibold text-apple-cyan uppercase tracking-widest block mb-2 font-mono">
               SPECIFICATIONS & ARCHITECTURE
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               Engineered to <span className="text-gradient-cyan">Outperform.</span>
             </h2>
           </div>
 
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center space-x-2 px-6 py-3 rounded-full glass-card hover:bg-white/10 border border-white/15 text-sm font-semibold text-white transition-all self-start md:self-auto"
+            className="inline-flex items-center space-x-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full glass-card hover:bg-white/10 border border-white/15 text-xs sm:text-sm font-semibold text-white transition-all self-start md:self-auto"
           >
             <FileText className="w-4 h-4 text-apple-cyan" />
             <span>View Complete Spec Sheet</span>
@@ -73,7 +73,7 @@ export default function TechSpecs() {
         </div>
 
         {/* High Impact Metric Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-12">
           {TECH_SPECS.map((spec, idx) => (
             <motion.div
               key={idx}
@@ -81,13 +81,13 @@ export default function TechSpecs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="glass-card glass-card-hover p-6 sm:p-8 rounded-3xl border border-white/10 flex flex-col justify-between"
+              className="glass-card glass-card-hover p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 flex flex-col justify-between"
             >
               <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-white/40 block mb-2">
+                <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-white/40 block mb-2">
                   {spec.label}
                 </span>
-                <span className="text-3xl sm:text-4xl font-extrabold text-gradient-cyan block mb-2 tracking-tight">
+                <span className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-gradient-cyan block mb-2 tracking-tight">
                   {spec.value}
                 </span>
               </div>
@@ -104,38 +104,38 @@ export default function TechSpecs() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-xl"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-xl"
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="glass-card w-full max-w-4xl max-h-[85vh] rounded-3xl p-6 sm:p-10 border border-white/20 overflow-y-auto relative shadow-2xl"
+              className="glass-card w-full max-w-4xl max-h-[85vh] rounded-2xl sm:rounded-3xl p-5 sm:p-10 border border-white/20 overflow-y-auto relative shadow-2xl"
             >
-              <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8 sticky top-0 bg-charcoal-800/90 backdrop-blur-md pt-2 z-10">
+              <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-white/10 mb-6 sm:mb-8 sticky top-0 bg-charcoal-800/90 backdrop-blur-md pt-2 z-10">
                 <div>
-                  <h3 className="text-2xl font-bold text-white">Apple AirPods Max Technical Datasheet</h3>
+                  <h3 className="text-lg sm:text-2xl font-bold text-white">Apple AirPods Max Technical Datasheet</h3>
                   <p className="text-xs text-white/50">Official Engineering Specifications</p>
                 </div>
                 <button
                   onClick={() => setModalOpen(false)}
                   className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-white/70 hover:text-white transition-colors"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
 
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
                 {fullSpecCategories.map((cat, idx) => (
                   <div key={idx} className="space-y-3">
-                    <h4 className="text-sm font-semibold uppercase tracking-wider text-apple-cyan font-mono">
+                    <h4 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-apple-cyan font-mono">
                       {cat.category}
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                       {cat.items.map((item, itemIdx) => (
-                        <div key={itemIdx} className="p-4 rounded-xl bg-white/5 border border-white/5">
+                        <div key={itemIdx} className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/5">
                           <span className="block text-xs text-white/50 mb-1">{item.key}</span>
-                          <span className="block text-sm font-semibold text-white/90">{item.val}</span>
+                          <span className="block text-xs sm:text-sm font-semibold text-white/90">{item.val}</span>
                         </div>
                       ))}
                     </div>

@@ -65,19 +65,20 @@ export default function Navbar({ onNavClick }: NavbarProps) {
         </nav>
 
         {/* Right CTA Button & Mobile Toggle */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <button
             onClick={() => onNavClick('buy')}
-            className="btn-gradient px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide text-white flex items-center space-x-1 shadow-lg shadow-apple-blue/20 hover:shadow-apple-cyan/30"
+            className="btn-gradient px-3 py-1.5 sm:px-4 rounded-full text-xs font-semibold tracking-wide text-white flex items-center space-x-1 shadow-lg shadow-apple-blue/20 hover:shadow-apple-cyan/30"
           >
-            <span>Experience AirPods Max</span>
+            <span className="hidden xs:inline">Experience AirPods Max</span>
+            <span className="xs:hidden">Experience</span>
             <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
           </button>
 
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white/80 hover:text-white p-1"
+            className="md:hidden text-white/80 hover:text-white p-1 ml-1"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

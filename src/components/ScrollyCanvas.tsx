@@ -58,9 +58,13 @@ export default function ScrollyCanvas({
 
       let scaleFactor = 0.85;
       if (isDesktop && heroWeight > 0) {
-        // Larger render in hero state (occupying 55-60% width)
+        // Larger render in hero state on desktop (occupying ~60% width)
         const heroScale = 0.95;
         scaleFactor = scaleFactor * (1 - heroWeight) + heroScale * heroWeight;
+      } else if (!isDesktop && !isTablet && heroWeight > 0) {
+        // Mobile portrait mode: optimal scaling so headphones fit nicely with hero text
+        const mobileScale = 0.76;
+        scaleFactor = scaleFactor * (1 - heroWeight) + mobileScale * heroWeight;
       }
 
       let drawWidth = width;
@@ -84,13 +88,12 @@ export default function ScrollyCanvas({
 
       if (isDesktop) {
         // Position product on right side with slight overflow outside right edge
-        // Right center target ~ 68% of viewport width
         heroX = width * 0.64 - drawWidth * 0.45;
       } else if (isTablet) {
         heroX = width * 0.58 - drawWidth * 0.45;
       } else {
-        // Mobile: push slightly down so headline top has clean room
-        heroY = centeredY + height * 0.08;
+        // Mobile: push down so title top has clear breathing space
+        heroY = centeredY + height * 0.10;
       }
 
       // Interpolate between hero offset and centered offset based on heroWeight

@@ -85,33 +85,33 @@ export default function AncSimulator() {
   }, [ancMode]);
 
   return (
-    <section id="anc-demo" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-charcoal-800 border-t border-b border-white/10 overflow-hidden">
+    <section id="anc-demo" className="relative py-16 sm:py-28 px-4 sm:px-6 lg:px-8 bg-charcoal-800 border-t border-b border-white/10 overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-apple-blue/10 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-apple-blue/20 border border-apple-blue/40 text-apple-cyan text-xs font-semibold uppercase tracking-wider mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-apple-blue/20 border border-apple-blue/40 text-apple-cyan text-[11px] sm:text-xs font-semibold uppercase tracking-wider mb-4">
             <Radio className="w-3.5 h-3.5 animate-pulse" />
             <span>Interactive Noise Cancellation Engine</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
             Silence on Demand. <span className="text-gradient-cyan">Tested in Real-Time.</span>
           </h2>
-          <p className="text-base sm:text-lg text-white/70">
+          <p className="text-sm sm:text-lg text-white/70">
             Select a sound environment below to experience how dual Apple H1 chips and an 8-microphone array neutralize ambient noise.
           </p>
         </div>
 
         {/* Visualizer Canvas Container */}
-        <div className="glass-card rounded-3xl p-6 sm:p-10 mb-10 border border-white/10 relative overflow-hidden">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+        <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-10 mb-8 sm:mb-10 border border-white/10 relative overflow-hidden">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div className="flex items-center space-x-3">
-              <div className={`p-2.5 rounded-xl ${ancMode === 'full' ? 'bg-apple-cyan/20 text-apple-cyan' : ancMode === 'ambient' ? 'bg-amber-500/20 text-amber-400' : 'bg-red-500/20 text-red-400'}`}>
+              <div className={`p-2.5 rounded-xl shrink-0 ${ancMode === 'full' ? 'bg-apple-cyan/20 text-apple-cyan' : ancMode === 'ambient' ? 'bg-amber-500/20 text-amber-400' : 'bg-red-500/20 text-red-400'}`}>
                 {ancMode === 'full' ? <ShieldCheck className="w-6 h-6" /> : ancMode === 'ambient' ? <Radio className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">
+                <h3 className="text-base sm:text-lg font-bold text-white">
                   {ancMode === 'full' ? '100% Active Noise Cancelling' : ancMode === 'ambient' ? 'Smart Transparency Mode' : 'Noise Cancellation OFF'}
                 </h3>
                 <p className="text-xs text-white/50">
@@ -120,20 +120,20 @@ export default function AncSimulator() {
               </div>
             </div>
 
-            <div className="text-right">
-              <span className="text-2xl font-mono font-bold text-gradient-cyan">
+            <div className="text-left sm:text-right shrink-0">
+              <span className="text-xl sm:text-2xl font-mono font-bold text-gradient-cyan">
                 {ancMode === 'full' ? '-42 dB' : ancMode === 'ambient' ? '-18 dB' : '0 dB'}
               </span>
-              <span className="block text-[10px] uppercase font-mono tracking-widest text-white/40">NOISE ATTENUATION</span>
+              <span className="block text-[9px] sm:text-[10px] uppercase font-mono tracking-widest text-white/40">NOISE ATTENUATION</span>
             </div>
           </div>
 
           {/* Waveform Canvas */}
-          <div className="w-full h-36 bg-black/60 rounded-2xl border border-white/10 overflow-hidden relative flex items-center justify-center">
+          <div className="w-full h-28 sm:h-36 bg-black/60 rounded-xl sm:rounded-2xl border border-white/10 overflow-hidden relative flex items-center justify-center">
             <canvas ref={canvasRef} width={800} height={144} className="w-full h-full" />
-            <div className="absolute bottom-2 right-4 text-[10px] font-mono text-white/40 uppercase tracking-widest flex items-center gap-1">
+            <div className="absolute bottom-2 right-3 sm:right-4 text-[9px] sm:text-[10px] font-mono text-white/40 uppercase tracking-widest flex items-center gap-1">
               <Zap className="w-3 h-3 text-apple-cyan" />
-              <span>Real-Time Computational Audio Signal</span>
+              <span>Real-Time Signal</span>
             </div>
           </div>
         </div>

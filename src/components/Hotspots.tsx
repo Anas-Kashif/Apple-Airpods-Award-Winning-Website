@@ -78,7 +78,13 @@ export default function Hotspots({ scrollProgress }: HotspotsProps) {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.25 }}
-                      className="absolute left-1/2 bottom-full mb-3 -translate-x-1/2 w-72 glass-card p-5 rounded-2xl border border-apple-cyan/40 shadow-2xl z-40"
+                      className={`absolute bottom-full mb-3 w-[85vw] max-w-[280px] sm:w-72 glass-card p-4 sm:p-5 rounded-2xl border border-apple-cyan/40 shadow-2xl z-40 ${
+                        hotspot.xPercent < 35
+                          ? 'left-0'
+                          : hotspot.xPercent > 65
+                          ? 'right-0 left-auto'
+                          : 'left-1/2 -translate-x-1/2'
+                      }`}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center space-x-2">
@@ -87,7 +93,8 @@ export default function Hotspots({ scrollProgress }: HotspotsProps) {
                         </div>
                         <button
                           onClick={() => setSelectedHotspot(null)}
-                          className="text-white/40 hover:text-white"
+                          className="text-white/40 hover:text-white p-1"
+                          aria-label="Close details"
                         >
                           <X className="w-4 h-4" />
                         </button>
