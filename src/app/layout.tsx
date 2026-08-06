@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
@@ -7,6 +7,14 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+  themeColor: '#020202',
+};
 
 export const metadata: Metadata = {
   title: 'Apple AirPods Max | High-Fidelity Audio, Perfected',
@@ -21,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} dark`}>
-      <body className="bg-void text-white selection:bg-apple-blue/40 selection:text-white antialiased">
+      <body className="bg-void text-white selection:bg-apple-blue/40 selection:text-white antialiased overflow-x-hidden">
         {children}
       </body>
     </html>

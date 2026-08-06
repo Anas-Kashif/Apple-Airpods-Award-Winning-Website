@@ -40,8 +40,10 @@ export default function ScrollyCanvas({
       const width = canvas.width;
       const height = canvas.height;
       const dpr = window.devicePixelRatio || 1;
-      const isDesktop = width / dpr >= 1024;
-      const isTablet = width / dpr >= 768 && width / dpr < 1024;
+      const viewportWidth = width / dpr;
+      const isDesktop = viewportWidth >= 1024;
+      const isTablet = viewportWidth >= 768 && viewportWidth < 1024;
+      const isMobile = viewportWidth < 768;
 
       // Clear with exact void background #020202
       ctx.fillStyle = '#020202';
@@ -61,10 +63,18 @@ export default function ScrollyCanvas({
         // Larger render in hero state on desktop (occupying ~60% width)
         const heroScale = 0.95;
         scaleFactor = scaleFactor * (1 - heroWeight) + heroScale * heroWeight;
-      } else if (!isDesktop && !isTablet && heroWeight > 0) {
-        // Mobile portrait mode: optimal scaling so headphones fit nicely with hero text
-        const mobileScale = 0.76;
+      } else if (isTablet && heroWeight > 0) {
+        const tabletScale = 0.82;
+        scaleFactor = scaleFactor * (1 - heroWeight) + tabletScale * heroWeight;
+      } else if (isMobile && heroWeight > 0) {
+        // Mobile portrait: scale to fit nicely below hero text
+        const mobileScale = 0.72;
         scaleFactor = scaleFactor * (1 - heroWeight) + mobileScale * heroWeight;
+      }
+
+      // During non-hero scrolling on mobile, scale up to fill more of the viewport
+      if (isMobile && heroWeight <= 0) {
+        scaleFactor = 0.92;
       }
 
       let drawWidth = width;
@@ -92,20 +102,21 @@ export default function ScrollyCanvas({
       } else if (isTablet) {
         heroX = width * 0.58 - drawWidth * 0.45;
       } else {
-        // Mobile: push down so title top has clear breathing space
-        heroY = centeredY + height * 0.10;
+        // Mobile: center horizontally, push down below the hero text
+        heroX = centeredX;
+        heroY = centeredY + height * 0.15;
       }
 
       // Interpolate between hero offset and centered offset based on heroWeight
       const finalX = centeredX * (1 - heroWeight) + heroX * heroWeight;
 
-      // Subtle continuous vertical floating animation (very soft)
-      const floatAmplitude = 12 * dpr * heroWeight;
+      // Subtle continuous vertical floating animation (reduced on mobile for performance)
+      const floatAmplitude = isMobile ? 6 * dpr * heroWeight : 12 * dpr * heroWeight;
       const floatOffset = Math.sin(timeMs * 0.002) * floatAmplitude;
       const finalY = (centeredY * (1 - heroWeight) + heroY * heroWeight) + floatOffset;
 
       ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
+      ctx.imageSmoothingQuality = isMobile ? 'medium' : 'high';
       ctx.drawImage(img, finalX, finalY, drawWidth, drawHeight);
 
       if (onFrameUpdate) {
@@ -121,7 +132,9 @@ export default function ScrollyCanvas({
       const canvas = canvasRef.current;
       if (!canvas) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Cap DPR at 2 on mobile for performance
+      const isMobile = window.innerWidth < 768;
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
 
@@ -130,7 +143,13 @@ export default function ScrollyCanvas({
 
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    // Also listen for orientation change on mobile
+    window.addEventListener('orientationchange', () => {
+      setTimeout(handleResize, 100);
+    });
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [drawFrame]);
 
   // Smooth render loop for frame lerp + continuous subtle floating animation
@@ -169,12 +188,12 @@ export default function ScrollyCanvas({
 
   return (
     <div className="relative w-full h-full flex items-center justify-center bg-void overflow-hidden">
-      {/* Soft Radial Background Glow behind AirPods Max */}
+      {/* Soft Radial Background Glow behind AirPods Max — responsive sizing */}
       <div
-        className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[750px] h-[750px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,113,227,0.18)_0%,rgba(0,214,255,0.05)_45%,transparent_70%)] blur-[90px] pointer-events-none transition-opacity duration-700 z-0"
+        className="absolute right-[-10%] md:right-[-10%] top-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[750px] md:h-[750px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,113,227,0.18)_0%,rgba(0,214,255,0.05)_45%,transparent_70%)] blur-[60px] sm:blur-[90px] pointer-events-none transition-opacity duration-700 z-0"
         style={{ opacity: scrollProgress <= 0.22 ? 1 : 0.2 }}
       />
-      <div className="absolute left-[10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-apple-blue/5 blur-[120px] pointer-events-none z-0" />
+      <div className="absolute left-[10%] top-1/2 -translate-y-1/2 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-apple-blue/5 blur-[80px] sm:blur-[120px] pointer-events-none z-0" />
 
       {/* Main High-Performance Canvas */}
       <canvas
