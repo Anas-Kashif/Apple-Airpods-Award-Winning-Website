@@ -12,8 +12,8 @@ interface HotspotsProps {
 export default function Hotspots({ scrollProgress }: HotspotsProps) {
   const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
 
-  // Hotspots visible during 40% to 42% scroll progress (0.40 to 0.42)
-  const isVisible = scrollProgress >= 0.40 && scrollProgress <= 0.42;
+  // Hotspots visible during 40% to 70% scroll progress (0.40 to 0.70)
+  const isVisible = scrollProgress >= 0.40 && scrollProgress <= 0.70;
 
   const getIcon = (iconName: string) => {
     switch (iconName) {

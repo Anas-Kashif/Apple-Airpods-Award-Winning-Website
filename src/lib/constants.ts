@@ -39,43 +39,15 @@ export const STORY_BEATS: StoryBeat[] = [
   {
     id: 'engineering',
     startProgress: 0.18,
-    endProgress: 0.40,
+    endProgress: 0.39,
     alignment: 'left',
     eyebrow: 'ACOUSTIC ARCHITECTURE',
-    title: 'Precision-engineered for pure sound.',
+    title: 'Precision-engineered for\npure sound.',
     subtitle: 'Custom Apple dynamic driver, breathable knit mesh canopy, and acoustically engineered memory foam cushions deliver studio-grade clarity.',
     points: [
       'Apple-designed 40mm dynamic driver',
       'Breathable knit mesh canopy & memory foam cushions',
       'Acoustically engineered dual-neodymium ring magnet motor',
-    ],
-  },
-  {
-    id: 'anc',
-    startProgress: 0.43,
-    endProgress: 0.65,
-    alignment: 'right',
-    eyebrow: 'COMPUTATIONAL AUDIO & ANC',
-    title: 'Industry-leading Active Noise Cancellation.',
-    subtitle: 'Dual Apple H1 headphone chips and an 8-microphone array work in unison to eliminate ambient sound in real time.',
-    points: [
-      'Eight microphones for Active Noise Cancellation',
-      'Dual Apple H1 chips (10 audio cores per chip)',
-      'Adaptive EQ & Transparency mode',
-    ],
-  },
-  {
-    id: 'sound',
-    startProgress: 0.68,
-    endProgress: 0.85,
-    alignment: 'left',
-    eyebrow: 'SPATIAL AUDIO ENGINE',
-    title: 'Immersive, theater-like sound.',
-    subtitle: 'Personalized Spatial Audio with dynamic head tracking places sound all around you for a three-dimensional listening experience.',
-    points: [
-      'Personalized Spatial Audio with dynamic head tracking',
-      'Apple-designed H1 chip computational audio',
-      'Ultra-low distortion driver across the audible spectrum',
     ],
   },
 ];
@@ -89,7 +61,7 @@ export const EXPLODED_HOTSPOTS: Hotspot[] = [
     xPercent: 48,
     yPercent: 36,
     frameStart: 90,
-    frameEnd: 160,
+    frameEnd: 168,
     iconName: 'Cpu',
   },
   {
@@ -100,7 +72,7 @@ export const EXPLODED_HOTSPOTS: Hotspot[] = [
     xPercent: 32,
     yPercent: 54,
     frameStart: 90,
-    frameEnd: 160,
+    frameEnd: 168,
     iconName: 'Disc',
   },
   {
@@ -111,7 +83,7 @@ export const EXPLODED_HOTSPOTS: Hotspot[] = [
     xPercent: 68,
     yPercent: 44,
     frameStart: 90,
-    frameEnd: 160,
+    frameEnd: 168,
     iconName: 'Mic',
   },
   {
@@ -122,7 +94,7 @@ export const EXPLODED_HOTSPOTS: Hotspot[] = [
     xPercent: 78,
     yPercent: 62,
     frameStart: 90,
-    frameEnd: 160,
+    frameEnd: 168,
     iconName: 'Shield',
   },
 ];

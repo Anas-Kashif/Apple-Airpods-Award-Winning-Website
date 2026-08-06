@@ -102,7 +102,7 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -30, filter: 'blur(10px)' }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className={`w-full max-w-2xl pointer-events-auto ${
+              className={`w-full max-w-lg pointer-events-auto ${
                 activeBeat.alignment === 'center'
                   ? 'text-center mx-auto'
                   : activeBeat.alignment === 'left'
@@ -113,31 +113,31 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
               {/* Eyebrow Label */}
               {activeBeat.eyebrow && (
                 <div
-                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-4 backdrop-blur-md ${
+                  className={`inline-flex items-center space-x-2 px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 mb-3 backdrop-blur-md ${
                     activeBeat.alignment === 'center' ? 'mx-auto' : ''
                   }`}
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-apple-cyan" />
-                  <span className="text-[11px] font-semibold tracking-widest text-apple-cyan uppercase">
+                  <Sparkles className="w-3 h-3 text-apple-cyan" />
+                  <span className="text-[10px] font-semibold tracking-widest text-apple-cyan uppercase">
                     {activeBeat.eyebrow}
                   </span>
                 </div>
               )}
 
               {/* Headline */}
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4 leading-[1.08]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-3 leading-[1.1] whitespace-pre-line">
                 {activeBeat.title}
               </h2>
 
               {/* Subtitle / Body Copy (#D1D1D1) */}
-              <p className="text-lg sm:text-xl text-[#D1D1D1] font-normal leading-relaxed mb-6 max-w-xl">
+              <p className="text-sm sm:text-base text-[#D1D1D1] font-normal leading-relaxed mb-4 max-w-md">
                 {activeBeat.subtitle}
               </p>
 
               {/* Key Feature Bullet Points */}
               {activeBeat.points && (
                 <div
-                  className={`flex flex-col space-y-2.5 mb-8 ${
+                  className={`flex flex-col space-y-2 mb-6 ${
                     activeBeat.alignment === 'center'
                       ? 'items-center'
                       : activeBeat.alignment === 'left'
@@ -148,9 +148,9 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
                   {activeBeat.points.map((pt, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center space-x-2.5 text-sm text-[#D1D1D1] font-medium"
+                      className="flex items-center space-x-2 text-xs sm:text-sm text-[#D1D1D1] font-medium"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-apple-cyan shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-apple-cyan shrink-0" />
                       <span>{pt}</span>
                     </div>
                   ))}
@@ -159,19 +159,19 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
 
               {/* Call to Action Buttons */}
               {activeBeat.ctaText && (
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                   <button
                     onClick={() => onCtaClick('buy')}
-                    className="btn-gradient px-8 py-3.5 rounded-full text-sm font-semibold tracking-wide text-white flex items-center space-x-2 shadow-2xl shadow-apple-blue/50 hover:scale-105 transition-transform"
+                    className="btn-gradient px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide text-white flex items-center space-x-2 shadow-xl shadow-apple-blue/40 hover:scale-105 transition-transform"
                   >
                     <span>{activeBeat.ctaText}</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </button>
 
                   {activeBeat.secondaryCtaText && (
                     <button
                       onClick={() => onCtaClick('specs')}
-                      className="px-6 py-3.5 rounded-full text-sm font-medium text-white/80 hover:text-white bg-white/5 hover:bg-white/10 border border-white/15 backdrop-blur-md transition-all"
+                      className="px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium text-white/80 hover:text-white bg-white/5 hover:bg-white/10 border border-white/15 backdrop-blur-md transition-all"
                     >
                       {activeBeat.secondaryCtaText}
                     </button>
