@@ -24,7 +24,7 @@ export default function StoryBeats({ scrollProgress, onCtaClick }: StoryBeatsPro
       <div className="h-12 xs:h-14 sm:h-16" />
 
       {/* Main Narrative Beats Overlay Container */}
-      <div className="max-w-7xl mx-auto w-full flex-1 flex items-center relative">
+      <div className="max-w-7xl mx-auto w-full flex-1 flex items-start lg:items-center relative">
         <AnimatePresence mode="wait">
           {activeBeat && isHero && (
             <motion.div
